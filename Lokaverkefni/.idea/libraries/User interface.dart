@@ -1,32 +1,31 @@
 import 'dart:io';
 
-void main() {
-  print('Welcome to the room!');
+List<Map<String, dynamic>> commands = [3
+  {'number': '1', 'description': 'Open the door', 'action': 'You open the door and find a corridor.'},
+  {'number': '2', 'description': 'Pick up item', 'action': 'You pick up an item.'},
+  {'number': '3', 'description': 'Use item', 'action': 'You used the item.'},
+];
 
-  List<Map<String, dynamic>> commands = [
-    {'number': '1', 'description': 'Look around', 'action': 'You look around and see a table and a chair.'},
-    {'number': '2', 'description': 'Open the door', 'action': 'You open the door and find a corridor.'},
-    {'number': '3', 'description': 'Sit down', 'action': 'You sit down and take a rest.'},
-  ];
+String getPlayerInput() {
+  print('What would you like to do?');
+  commands.forEach((command) {
+    print('${command['number']}. ${command['description']}');
+  });
 
-  while (true) {
-    print('What would you like to do?');
-    commands.forEach((command) {
-      print('${command['number']}. ${command['description']}');
-    });
+  return stdin.readLineSync() ?? '';
+}
 
-    String? userInput = stdin.readLineSync();
-
-    bool commandFound = false;
-    commands.forEach((command) {
-      if (userInput == command['number']) {
-        print(command['action']);
-        commandFound = true;
-      }
-    });
-
-    if (!commandFound) {
-      print('Invalid input. Please enter a number between 1 and ${commands.length}.');
+bool executeCommand(String userInput) {
+  bool commandFound = false;
+  commands.forEach((command) {
+    if (userInput == command['number']) {
+      print(command['action']);
+      commandFound = true;
     }
+  });
+
+  if (!commandFound) {
+    print('Invalid input. Please enter a number between 1 and ${commands.length}.');
   }
+  return commandFound;
 }
