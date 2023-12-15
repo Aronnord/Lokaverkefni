@@ -1,6 +1,6 @@
 import 'dart:io';
 
-List<Map<String, dynamic>> commands = [3
+List<Map<String, dynamic>> commands = [
   {'number': '1', 'description': 'Open the door', 'action': 'You open the door and find a corridor.'},
   {'number': '2', 'description': 'Pick up item', 'action': 'You pick up an item.'},
   {'number': '3', 'description': 'Use item', 'action': 'You used the item.'},
@@ -18,7 +18,7 @@ String getPlayerInput() {
 bool executeCommand(String userInput) {
   bool commandFound = false;
   commands.forEach((command) {
-    if (userInput == command['number']) {
+    if (userInput == command['number'].toString()) {
       print(command['action']);
       commandFound = true;
     }
