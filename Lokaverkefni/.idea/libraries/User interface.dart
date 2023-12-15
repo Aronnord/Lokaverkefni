@@ -23,20 +23,26 @@ String getPlayerInput() {
 
 bool executeCommand(String userInput) {
   bool commandFound = false;
-  commands.forEach((command) {
-    if (userInput == command['number'].toString()) {
-      print(command['action']);
-      if (command.containsKey('acquiredItem')) {
-        inventory.add(command['acquiredItem']);
-        print('You acuquired ${command['acquierdItem']}!');
-      }
-      commandFound = true;
-    }
-  });
 
-  if (!commandFound) {
-    print('Invalid input. Please enter a number between 1 and ${commands.length}.');
+  bool isValidInput = int.tryParse(userInput) != null &&
+      int.parse(userInput) >= 1&&
+      int.parse(userInput) <= commands.length;
+  
+  if (isValidInput) {
+    commands.forEach((command) {
+      if (userInput == command['number'].toString()) {
+        print(command['action']);
+        if (command.containsKey('acquiredItem')) {
+          inventory.add(command['acquiredItem']);
+          print('You acuquired ${command['acquierdItem']}!');
+        }
+        commandFound = true;
+      }
+    });
+  } else {
+    print('Invalid input. Please enter number between 1 and ${commands.length}.');
   }
+
   return commandFound;
 }
 
