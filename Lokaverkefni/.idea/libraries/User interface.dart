@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'movement.dart';
+import 'inventory.dart';
 
 List<Map<String, dynamic>> commands = [
   {'number': '1', 'description': 'Move', 'action': 'Choose a movement direction.'},
-  {'number': '2', 'description': 'Open the door', 'action': 'You open the door and find a corridor.'},
+  {'number': '2', 'description': 'Check the inventory', 'action': 'You check your inventory.'},
   {'number': '3', 'description': 'Pick up item', 'action': 'You pick up an item.'},
   {'number': '4', 'description': 'Use item', 'action': 'You used the item.'},
 ];
@@ -30,12 +31,13 @@ bool executeCommand(String userInput) {
     commands.forEach((command) {
       if (userInput == command['number'].toString()) {
         if (userInput == '1') {
-          showMovementOptions(); // This function is from movement.dart
+          showMovementOptions();
+        } else if (userInput == '2') {
+          showInventory();
         } else {
           print(command['action']);
           if (command.containsKey('acquiredItem')) {
-            inventory.add(command['acquiredItem']);
-            print('You acquired ${command['acquiredItem']}!');
+            addToInventory(command['acquiredItem']);
           }
         }
         commandFound = true;

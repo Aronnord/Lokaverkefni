@@ -1,7 +1,7 @@
 import 'room_description.dart';
 import 'User interface.dart';
 import 'dart:io';
-
+import 'movement.dart';
 
 void main() {
   String roomDescription = getRoomDescription();
@@ -18,7 +18,10 @@ void main() {
     bool commandFound = executeCommand(userInput);
 
     if (!commandFound) {
-      print('Invalid command. Please try again.');
+      bool movementCommandFound = executeMovementCommand(userInput);
+      if (!movementCommandFound) {
+        print('Invalid command. Please try again.');
+      }
     }
   }
 }
