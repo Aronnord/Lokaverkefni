@@ -4,6 +4,7 @@ import 'dart:io';
 import 'movement.dart';
 
 void main() {
+  //get the desription for the room.
   String roomDescription = getRoomDescription();
   print(roomDescription);
 

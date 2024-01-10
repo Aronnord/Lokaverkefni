@@ -6,6 +6,7 @@ import 'room_left_description.dart';
 bool hasKey = false;
 
 void enterLeftRoom() {
+  //Get the description for this room.
   print(getLeftRoomDescription());
 
   print('There is atable in the room with a key on it.');
